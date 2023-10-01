@@ -31,6 +31,4 @@ numberOfPassages = 29  # @param {type: "slider", max: 100, min: 1}
 
 
 # Generate new text.
-sys.path.insert(1, 'nanoGPT-colab')
-import sample
-sample.sample(out_dir='out-google-colab-char', device='cpu', start=start_of_output, num_samples=numberOfPassages, temperature=temperature)
+!cd nanoGPT-colab/ && python sample --out_dir='out-google-colab-char' --device='cpu' --start=$start_of_output --num_samples=$numberOfPassages --temperature=$temperature
