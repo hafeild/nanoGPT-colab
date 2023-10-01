@@ -21,5 +21,16 @@ prepare.prepareGoogleColab()
     --block_size=64 --batch_size=12 --n_layer=4 --n_head=4 \
     --n_embd=128 --max_iters=2000 --lr_decay_iters=2000 --dropout=0.0
 
+
+# @title Text generation settings
+# @markdown Specify each of the following before running this cell.
+
+start_of_output = 'If I could have three wishes'  # @param {type: "string"}
+temperature = 0.8 # @param {type: "slider", min: 0, max: 2, step: 0.05}
+numberOfPassages = 29  # @param {type: "slider", max: 100, min: 1}
+
+
 # Generate new text.
-!cd nanoGPT-colab/ && python sample.py --out_dir=out-google-colab-char --device=cpu
+sys.path.insert(1, 'nanoGPT-colab')
+import sample
+sample.sample(out_dir='out-google-colab-char', device='cpu', start=start_of_output, num_samples=numberOfPassages, temperature=temperature)
