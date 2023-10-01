@@ -1,4 +1,5 @@
-# Paste this into a Google Colab notebook cell and run it.
+# Paste this into a Google Colab notebook cell and run it. If you want to make it a bit more
+# modular, paste each chunk into its own cell.
 
 # Install necessary packages.
 !pip install torch numpy transformers datasets tiktoken wandb tqdm
@@ -11,6 +12,7 @@ import sys
 # caution: path[0] is reserved for script path (or '' in REPL)
 sys.path.insert(1, 'nanoGPT-colab/data/google_colab_char')
 import prepare
+prepare.prepareGoogleColab()
 
 # Train.
 !cd nanoGPT-colab/ && python train.py config/train_google_colab_char.py \
