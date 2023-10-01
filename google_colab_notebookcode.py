@@ -19,4 +19,4 @@ import prepare
     --n_embd=128 --max_iters=2000 --lr_decay_iters=2000 --dropout=0.0
 
 # Generate new text.
-!cd nanoGPT/ && python sample.py --out_dir=out-google-colab-char --device=cpu
+!cd nanoGPT-colab/ && python sample.py --out_dir=out-google-colab-char --device=cpu
