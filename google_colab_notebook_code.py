@@ -4,8 +4,9 @@
 # Install necessary packages.
 !pip install torch numpy transformers datasets tiktoken wandb tqdm
 
-# Clone the this repo.
+# Clone the this repo; update if necessary (if re-running cell after a repo change).
 !git clone https://github.com/hafeild/nanoGPT-colab.git
+!cd nanoGPT-colab && git pull 
 
 # Get and prepare the data for training.
 import sys
