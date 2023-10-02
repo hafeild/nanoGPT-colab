@@ -1,13 +1,10 @@
-"""
+'''
 File:   google_colab_char/prepare.py
 Author: Adapted by Henry Feild from Andrej Karpathy's shakespeare_char/prepare.py
 Date:   01-Oct-2023
-Purpose:
-    Gets a plaintext file from the user via Google Colab, then prepares it for for
-    character-level language modeling. So instead of encoding with GPT-2 BPE tokens,
-    we just map characters to ints. Will save train.bin, val.bin containing the ids,
-    and meta.pkl containing the encoder and decoder and some other related info.
-"""
+Purpose: Prepares user-supplied plaintext data for character-level language modeling.
+'''
+
 import os
 import pickle
 import requests
@@ -19,26 +16,25 @@ import numpy as np
 from google.colab import files 
 
 
-def prepareGoogleColab():
-    # Get the input file from the user
-    print("Please select one or more plaintext files you want to train the LLM with.")
-    uploaded = files.upload()
+def prepareGoogleColab(data=None):
+    '''Unless a data string is provided, gets a plaintext file from the user via Google 
+    Colab, then prepares it for for character-level language modeling. So
+    instead of encoding with GPT-2 BPE tokens, this just maps characters to ints.
+    Creates the files train.bin, val.bin containing the ids, and meta.pkl containing the
+    encoder and decoder and some other related info.
+    
+    Parameters:
+        data (str): The plaintext data to prepare. If None, the user will be prompted to
+                    upload a file via Google Colab. Default: None.
+    '''
 
-    # Write the data to a file.
-    # input_file_path = os.path.join(os.path.dirname(__file__), 'input.txt')
+    if data is None:
+        # Get the input file from the user
+        print("Please select one or more plaintext files you want to train the LLM with.")
+        uploaded = files.upload()
 
-    # with open(input_file_path, 'w') as f:
-    #     for filename in uploaded.keys():
-    #         f.write(uploaded[filename].decode('utf-8'))
-    #         f.write('\n')
-
-
-    # with open(input_file_path, 'r') as f:
-    #     data = f.read()
-    # print(f"length of dataset in characters: {len(data):,}")
-
-    # Read the data into one string.
-    data = '\n'.join([uploaded[filename].decode('utf-8') for filename in uploaded.keys()])
+        # Read the data into one string.
+        data = '\n'.join([uploaded[filename].decode('utf-8') for filename in uploaded.keys()])
 
     # get all the unique characters that occur in this text
     chars = sorted(list(set(data)))
